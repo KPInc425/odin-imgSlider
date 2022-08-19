@@ -1,0 +1,54 @@
+.content {
+    background-color: black;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+
+.content * {
+    margin: auto;
+}
+
+.testing {
+    color: white;
+}
+
+.imgSliderContainer {
+    border: 1px solid green;
+    width: 80%;
+    height: 800px;
+}
+
+.imgContainer {
+    position: relative;
+    border: 1px solid yellow;
+    width: 80%;
+    height: 500px;
+    margin-top: 25px;
+}
+
+.imgOrderContainer {
+    border: 1px solid pink;
+    width: 50%;
+    height: 35px;
+    margin-top: 5px;
+}
+
+.btnLeftContainer, .btnRightContainer {
+    position: absolute;
+    border: 1px solid blue;
+    width: 64px;
+    height: 64px;
+}
+
+.btnLeftContainer {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btnRightContainer {
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
