@@ -21,10 +21,36 @@
 
 .imgContainer {
     position: relative;
+    display: flex;
     border: 1px solid yellow;
     width: 80%;
     height: 500px;
     margin-top: 25px;
+}
+
+.innerImgContainer {
+    border: 1px solid brown;
+    z-index: 0;
+    width: 100px;
+    height: 450px;
+}
+
+.visibleImgContainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid purple;
+    background: grey;
+    width: 33%;
+    height: 480px;
+    z-index: 10;
+}
+
+.imgLeftContainer, .imgRightContainer {
+    border: 1px solid green;
+    width: 25%;
+    height: 480px;
 }
 
 .imgOrderContainer {
@@ -50,5 +76,10 @@
     top: 50%;
     right: 0;
     transform: translate(50%, -50%);
+}
+
+#btnRight, #btnLeft {
+    width: 64px;
+    height: 64px;
 }
 
