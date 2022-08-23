@@ -1,4 +1,5 @@
 const createImgSlider = (imgArray) => {
+    const length = imgArray.length;
     // Get ref for content element
     const contentContainer = document.querySelector('.content');
 
@@ -28,7 +29,7 @@ const createImgSlider = (imgArray) => {
     // Create Left button
     const btnLeft = document.createElement('button');
     btnLeft.id = 'btnLeft';
-    btnLeft.textContent = '<';
+    btnLeft.innerHTML = '&#10094;';
 
     // Create right Button container
     const btnRightContainer = document.createElement('div');
@@ -36,41 +37,145 @@ const createImgSlider = (imgArray) => {
     // Create Right Button
     const btnRight = document.createElement('button');
     btnRight.id = 'btnRight';
-    btnRight.textContent = '>';
+    btnRight.innerHTML = '&#10095;';
 
     // Create container to hold img position circles
     const imgOrderContainer = document.createElement('div');
     imgOrderContainer.classList.add('imgOrderContainer');
 
     const addImages = () => {
-        const length = 8;
-
-        for (let i = 0; i < length; i ++) {
+        
+        for (let i = 0; i < length; i++) {
             let tmpImgElementContainer = document.createElement('div');
             tmpImgElementContainer.classList.add('innerImgContainer');
+            tmpImgElementContainer.classList.add('hiddenImg');
+            tmpImgElementContainer.classList.add('fade');
+
+            let tmpImgNumberLabel = document.createElement('div');
+            tmpImgNumberLabel.classList.add('numberLabel');
+            tmpImgNumberLabel.textContent = `${i + 1} / ${length}`;
+            
 
             let tmpImgElement = document.createElement('img');
+            tmpImgElement.src = imgArray[i];
+            tmpImgElement.classList.add('sliderImg');
 
+            let tmpImgCaptionLabel = document.createElement('div');
+            tmpImgCaptionLabel.classList.add('textCaption');
+            tmpImgCaptionLabel.textContent = `Caption Text ${i + 1}`;
+
+            tmpImgElementContainer.appendChild(tmpImgNumberLabel);
             tmpImgElementContainer.appendChild(tmpImgElement);
+            tmpImgElementContainer.appendChild(tmpImgCaptionLabel);
             imgContainer.appendChild(tmpImgElementContainer);
         }
         console.log(length);
     }
 
-    addImages();
+    const addIndexCircles = () => {
+        for (let i = 0; i < length; i++) {
+            let tmpCircleElementContainer = document.createElement('div');
+            tmpCircleElementContainer.classList.add('indexCircleContainer');
 
-    imgContainer.appendChild(btnLeftContainer);
+            let tmpCircleElement = document.createElement('span');
+            tmpCircleElement.classList.add('dot');
+            tmpCircleElement.id = i + 1;
+
+            tmpCircleElement.addEventListener('click', (e) => {
+                e.stopPropagation();
+                console.log(`Clicked Dot for Slide ${tmpCircleElement.id}!`);
+                console.log(tmpCircleElement.id);
+                currentImg(i + 1);
+            });
+
+            tmpCircleElementContainer.appendChild(tmpCircleElement);
+            imgOrderContainer.appendChild(tmpCircleElementContainer);
+        }
+    }
+
+    addImages();
+    addIndexCircles();
+
     btnLeftContainer.appendChild(btnLeft);
-    imgContainer.appendChild(btnRightContainer);
+    imgContainer.appendChild(btnLeftContainer);
     btnRightContainer.appendChild(btnRight);
+    imgContainer.appendChild(btnRightContainer);
+
     // imgContainer.appendChild(imgLeftContainer);
-    imgContainer.appendChild(visibleImgContainer);
+    // imgContainer.appendChild(visibleImgContainer);
     // imgContainer.appendChild(imgRightContainer);
 
     imgSliderContainer.appendChild(imgContainer);
     imgSliderContainer.appendChild(imgOrderContainer);
 
     contentContainer.appendChild(imgSliderContainer);
+
+    let imgIndex = 1;
+    showImg(imgIndex);
+
+    function plusImg(n) {
+        showImg(imgIndex += n);
+    }
+
+    function currentImg(n) {
+        console.log(n);
+        showImg(imgIndex = n);
+    }
+
+    function showImg(n) {
+        let i;
+        let imgNodelist = document.querySelectorAll('.innerImgContainer');
+        let dotNodelist = document.getElementsByClassName('dot');
+        // console.log(imgNodelist);
+        console.log(n);
+
+        // Check for Above img amount
+        if (n > imgNodelist.length) {
+            imgIndex = 1;
+        }
+
+        // Check for below img amount
+        if (n < 1) {
+            imgIndex = imgNodelist.length;
+        }
+
+        // Give all images a display of none
+        for (i = 0; i < imgNodelist.length; i++) {
+            imgNodelist[i].style.display = 'none';
+        }
+
+        // remove active class from all dot elements
+        for (i = 0; i < dotNodelist.length; i++) {
+            dotNodelist[i].classList.remove("active");
+        }
+        // console.log(imgNodelist);
+
+        // Display Chosen Img
+        imgNodelist[imgIndex - 1].style.display = "block";
+        dotNodelist[imgIndex - 1].classList.add('active');
+        console.log(imgNodelist[imgIndex -1]);
+
+        // AutoScroll everyt 10 seconds
+        setTimeout(() => {
+            plusImg(1);
+        }, 10000);
+
+        // visibleImgContainer.appendChild(imgNodelist[imgIndex -1]);
+    }
+
+    btnLeft.addEventListener('click', (e) =>{
+        e.stopPropagation();
+        plusImg(-1);
+    })
+    btnRight.addEventListener('click', (e) =>{
+        e.stopPropagation();
+        plusImg(1);
+    })
+
+
+
+
+
 }
 
 export default createImgSlider;

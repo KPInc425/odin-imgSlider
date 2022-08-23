@@ -1,5 +1,10 @@
+body {
+    background: black;
+}
+
 .content {
-    background-color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* background-color: black; */
     /* display: flex;
     flex-direction: column;
     justify-content: center; */
@@ -14,7 +19,8 @@
 }
 
 .imgSliderContainer {
-    border: 1px solid green;
+    /* position: relative; */
+    /* border: 1px solid green; */
     width: 80%;
     height: 800px;
 }
@@ -22,17 +28,24 @@
 .imgContainer {
     position: relative;
     display: flex;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     width: 80%;
     height: 500px;
     margin-top: 25px;
 }
 
 .innerImgContainer {
-    border: 1px solid brown;
+    position: absolute;
+    top: 50%;
+    /* border: 1px solid brown; */
     z-index: 0;
-    width: 100px;
-    height: 450px;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-50%);
+}
+
+.hiddenImg {
+    display: none;
 }
 
 .visibleImgContainer {
@@ -40,46 +53,116 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid purple;
-    background: grey;
-    width: 33%;
-    height: 480px;
-    z-index: 10;
+    /* border: 1px solid purple; */
+    /* background: grey; */
+    width: 80%;
+    height: 95%;
+    z-index: 1;
 }
 
 .imgLeftContainer, .imgRightContainer {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     width: 25%;
     height: 480px;
 }
 
+.sliderImg {
+    position: relative;
+    width: 100%;
+    height: 100%; 
+}
+
+.textCaption {
+    color: #00ff40;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.numberLabel {
+    color: #00ff40;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
 .imgOrderContainer {
-    border: 1px solid pink;
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid pink; */
     width: 50%;
     height: 35px;
     margin-top: 5px;
 }
 
+.indexCircleContainer {
+    margin: 2px;
+}
+
 .btnLeftContainer, .btnRightContainer {
     position: absolute;
-    border: 1px solid blue;
     width: 64px;
     height: 64px;
+    transition: 0.6 ease;
+    border-radius: 3px 0 0 3px;
+    z-index: 10;
 }
 
 .btnLeftContainer {
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
 }
 
 .btnRightContainer {
     top: 50%;
     right: 0;
-    transform: translate(50%, -50%);
+    transform: translateY(-50%);
 }
 
 #btnRight, #btnLeft {
     width: 64px;
     height: 64px;
+    color: #00ff40;
+    background: none;
+    user-select:none;
+    border: none;
 }
 
+#btnLeft:hover {
+    background-color: rgba(0, 0, 0, 0.603);
+}
+#btnRight:hover {
+    background-color: rgba(0, 0, 0, 0.603);
+}
+
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    background-color: rgb(139, 139, 139);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6 ease;
+}
+
+.active, .dot:hover {
+    background-color: #00ff40;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+    
+}
+
+@keyframes fade {
+    from{opacity: .4}
+    to{opacity: 1}
+}

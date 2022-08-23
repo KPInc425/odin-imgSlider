@@ -13,6 +13,7 @@ module.exports = {
     // optimization: {
     //     runtimeChunk: 'single',
     // },
+    devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             filename: './index.html',
