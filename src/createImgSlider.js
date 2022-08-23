@@ -111,6 +111,7 @@ const createImgSlider = (imgArray) => {
     contentContainer.appendChild(imgSliderContainer);
 
     let imgIndex = 1;
+    let timeoutID;
     showImg(imgIndex);
 
     function plusImg(n) {
@@ -123,6 +124,10 @@ const createImgSlider = (imgArray) => {
     }
 
     function showImg(n) {
+        if (timeoutID != undefined) {
+            clearTimeout(timeoutID);
+        }
+
         let i;
         let imgNodelist = document.querySelectorAll('.innerImgContainer');
         let dotNodelist = document.getElementsByClassName('dot');
@@ -156,7 +161,7 @@ const createImgSlider = (imgArray) => {
         console.log(imgNodelist[imgIndex -1]);
 
         // AutoScroll everyt 10 seconds
-        setTimeout(() => {
+        timeoutID = setTimeout(() => {
             plusImg(1);
         }, 10000);
 

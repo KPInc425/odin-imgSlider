@@ -77,8 +77,10 @@ body {
     font-size: 15px;
     padding: 8px 12px;
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 8px;
-    width: 100%;
+    width: 80%;
     text-align: center;
 }
 
@@ -90,6 +92,10 @@ body {
     position: absolute;
     top: 0;
     z-index: 1;
+}
+
+.textCaption, .numberLabel {
+    background-color: rgba(105, 105, 105, 0.281);
 }
 
 .imgOrderContainer {
